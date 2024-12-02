@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Orçamento</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<header><!-- inicio Cabecalho -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-warning">
+    <div class="container">
+            
+    <a href="#" class="navbar-brand">
+    <img src="logo.png" width="142">
+            </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+        <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="nav-principal">
+        <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+            <a href="simulador-orcameto.html" class="nav-link">Orçamento</a>
+                </li>
+                <li class="nav-item">
+            <a href="simulador-investimento.html" class="nav-link">Investimento</a>
+                </li>
+                
+                <li class="nav-item">
+            <a href="" class="btn btn-outline-light ml-4">Entrar</a>
+                </li>
+        </ul>
+            </div>
+    </div>
+        </nav>
+    </header>
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Simulador de Orçamento</h1>
+        <form id="budget-form">
+            <div class="form-group">
+                <label for="income">Renda Mensal (R$)</label>
+                <input type="number" class="form-control" id="income" placeholder="Digite sua renda mensal" required>
+            </div>
+            <div class="form-group">
+                <label for="expenses">Despesas Mensais (R$)</label>
+                <input type="number" class="form-control" id="expenses" placeholder="Digite suas despesas totais" required>
+            </div>
+            <button type="button" class="btn btn-warning btn-block" onclick="calculateBudget()">Calcular</button>
+        </form>
+        <div id="budget-result" class="mt-4 text-center"></div>
+    </div>
+
+    <script>
+        function calculateBudget() {
+            const income = parseFloat(document.getElementById('income').value);
+            const expenses = parseFloat(document.getElementById('expenses').value);
+            const savings = income - expenses;
+
+            const resultDiv = document.getElementById('budget-result');
+            if (savings >= 0) {
+                resultDiv.innerHTML = `<h3 class="text-success">Você pode economizar R$ ${savings.toFixed(2)} por mês!</h3>`;
+            } else {
+                resultDiv.innerHTML = `<h3 class="text-danger">Você está com um déficit de R$ ${Math.abs(savings).toFixed(2)} por mês!</h3>`;
+            }
+        }
+    </script>
+</body>
+</html>

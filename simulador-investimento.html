@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Investimentos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header><!-- inicio Cabecalho -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-warning">
+    <div class="container">
+            
+    <a href="#" class="navbar-brand">
+    <img src="logo.png" width="142">
+            </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+        <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="nav-principal">
+        <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+            <a href="simulador-orcameto.html" class="nav-link">Orçamento</a>
+                </li>
+                <li class="nav-item">
+            <a href="simulador-investimento.html" class="nav-link">Investimento</a>
+                </li>
+                <li class="nav-item">
+            <a href="" class="btn btn-outline-light ml-4">Entrar</a>
+                </li>
+        </ul>
+            </div>
+    </div>
+        </nav>
+    </header>
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Simulador de Investimentos</h1>
+        <form id="investment-form">
+            <div class="form-group">
+                <label for="initial-investment">Investimento Inicial (R$)</label>
+                <input type="number" class="form-control" id="initial-investment" placeholder="Digite o valor inicial" required>
+            </div>
+            <div class="form-group">
+                <label for="monthly-investment">Aporte Mensal (R$)</label>
+                <input type="number" class="form-control" id="monthly-investment" placeholder="Digite o valor mensal" required>
+            </div>
+            <div class="form-group">
+                <label for="rate">Taxa de Juros (% ao mês)</label>
+                <input type="number" class="form-control" id="rate" placeholder="Ex: 1.5" required>
+            </div>
+            <div class="form-group">
+                <label for="months">Tempo (meses)</label>
+                <input type="number" class="form-control" id="months" placeholder="Digite a duração em meses" required>
+            </div>
+            <button type="button" class="btn btn-warning btn-block" onclick="calculateInvestment()">Calcular</button>
+        </form>
+        <div id="investment-result" class="mt-4 text-center"></div>
+    </div>
+
+    <script>
+        function calculateInvestment() {
+            const initialInvestment = parseFloat(document.getElementById('initial-investment').value);
+            const monthlyInvestment = parseFloat(document.getElementById('monthly-investment').value);
+            const rate = parseFloat(document.getElementById('rate').value) / 100;
+            const months = parseInt(document.getElementById('months').value);
+
+            let total = initialInvestment;
+            for (let i = 0; i < months; i++) {
+                total = (total + monthlyInvestment) * (1 + rate);
+            }
+
+            const resultDiv = document.getElementById('investment-result');
+            resultDiv.innerHTML = `<h3 class="text-success">Após ${months} meses, você terá R$ ${total.toFixed(2)}!</h3>`;
+        }
+    </script>
+</body>
+</html>
